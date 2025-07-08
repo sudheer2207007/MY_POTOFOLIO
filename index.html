@@ -2,158 +2,252 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sudheer | Data Science Portfolio</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sudheer | Data Science Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* DARK MODE STYLES */
+    .theme-toggle {
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      color: #333;
+      transition: 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      color: #0077ff;
+    }
+
+    body.dark-mode {
+      background-color: #121212;
+      color: #f1f1f1;
+    }
+
+    body.dark-mode .navbar,
+    body.dark-mode .footer,
+    body.dark-mode .certificates-section,
+    body.dark-mode .projects-section,
+    body.dark-mode .about-section,
+    body.dark-mode .skills-section,
+    body.dark-mode .contact-section {
+      background-color: #1e1e1e;
+    }
+
+    body.dark-mode .nav-links a,
+    body.dark-mode .footer a,
+    body.dark-mode .section-title,
+    body.dark-mode .certificate-caption,
+    body.dark-mode .about-content p,
+    body.dark-mode .skills-section h2,
+    body.dark-mode .project-info p,
+    body.dark-mode h3,
+    body.dark-mode label,
+    body.dark-mode input,
+    body.dark-mode textarea {
+      color: #f1f1f1;
+    }
+
+    body.dark-mode input,
+    body.dark-mode textarea {
+      background-color: #333;
+      border: 1px solid #555;
+    }
+
+    body.dark-mode .btn.primary {
+      background-color: #0077ff;
+      color: #fff;
+    }
+
+    body.dark-mode .btn.outline {
+      border: 1px solid #fff;
+      color: #fff;
+    }
+  </style>
 </head>
 
 <body>
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="logo">SUDHEER🧑‍💻PORTFOLIO</div>
-        <input type="checkbox" id="menu-toggle" hidden>
-        <label for="menu-toggle" class="menu-icon"><i class="fas fa-bars"></i></label>
-        <ul class="nav-links">
-            <li><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">SUDHEER🧑‍💻PORTFOLIO</div>
+    <input type="checkbox" id="menu-toggle" hidden>
+    <label for="menu-toggle" class="menu-icon"><i class="fas fa-bars"></i></label>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#certificates">Certificates</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><button id="theme-toggle" class="theme-toggle">🌙</button></li>
+    </ul>
+  </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-left">
-            <p class="tagline">DISCOVERING INSIGHTS THROUGH DATA</p>
-            <h1>Hi, I am <span>GANJA VENKATA SAI SUDHEER</span><br>Aspiring Data Scientist & Analyst</h1>
-            <div class="buttons">
-                <a href="#contact" class="btn primary">Hire me</a>
-                <a href="GANJA VENKATA SAI SUDHEER DATA SCIENCE.pdf" class="btn outline" download>Download CV</a>
-            </div>
-        </div>
-        <div class="hero-right">
-            <div class="bg-skew"></div>
-            <img src="./my image.jpg" alt="Sudheer" />
-        </div>
-    </section>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-left">
+      <p class="tagline">DISCOVERING INSIGHTS THROUGH DATA</p>
+      <h1>Hi, I am <span>GANJA VENKATA SAI SUDHEER</span><br>Aspiring Data Scientist & Analyst</h1>
+      <div class="buttons">
+        <a href="#contact" class="btn primary">Hire me</a>
+        <a href="GANJA VENKATA SAI SUDHEER DATA SCIENCE.pdf" class="btn outline" download>Download CV</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="bg-skew"></div>
+      <img src="./my image.jpg" alt="Sudheer" />
+    </div>
+  </section>
 
-    <!-- About Section -->
-    <section id="about" class="about-section">
-        <div class="container">
-            <div class="about-grid">
-                <div class="about-img">
-                    <img src="./into.jpg" alt="Profile Picture">
-                </div>
-                <div class="about-content">
-                    <h5 class="section-subtitle">MY INTRODUCTION</h5>
-                    <h2>About Me</h2>
-                    <p>
-                        I'm GANJA VENKATA SAI SUDHEER, a passionate Data Science and Data Analysis enthusiast from Andhra Pradesh, India. 
-                        My expertise includes Python, machine learning, Power BI, Tableau, and data visualization. 
-                        I’ve worked on real-world datasets to predict customer churn, analyze Spotify hits, and forecast cricket match outcomes using data mining techniques. 
-                        I’m driven by curiosity and love turning raw data into actionable insights.
-                    </p>
-                    <p><em>“Without data, you're just another person with an opinion.” – W. Edwards Deming</em></p>
-                    <div class="about-details">
-                        <p><strong>Name:</strong> GANJA VENKATA SAI SUDHEER</p>
-                        <p><strong>Date of birth:</strong> APRIL 18, 2002</p>
-                        <p><strong>Address:</strong> Pamarru, East Godavari, Andhra Pradesh, India</p>
-                        <p><strong>Zip code:</strong> 533305</p>
-                        <p><strong>Email:</strong> venkatasaisudheer03@gmail.com</p>
-                        <p><strong>Phone:</strong> +91-9010071468</p>
-                    </div>
-                    <div class="interests">
-                        <span><i class="fas fa-brain"></i> Machine Learning</span>
-                        <span><i class="fas fa-chart-line"></i> Data Analysis</span>
-                        <span><i class="fas fa-laptop-code"></i> Python Coding</span>
-                        <span><i class="fas fa-database"></i> SQL</span>
-                    </div>
-                </div>
-            </div>
+  <!-- About Section -->
+  <section id="about" class="about-section">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-img">
+          <img src="./into.jpg" alt="Profile Picture">
         </div>
-    </section>
+        <div class="about-content">
+          <h5 class="section-subtitle">MY INTRODUCTION</h5>
+          <h2>About Me</h2>
+          <p>
+            I'm GANJA VENKATA SAI SUDHEER, a passionate Data Science and Data Analysis enthusiast from Andhra Pradesh, India. 
+            My expertise includes Python, machine learning, Power BI, Tableau, and data visualization. 
+            I’ve worked on real-world datasets to predict customer churn, analyze Spotify hits, and forecast cricket match outcomes using data mining techniques. 
+            I’m driven by curiosity and love turning raw data into actionable insights.
+          </p>
+          <p><em>“Without data, you're just another person with an opinion.” – W. Edwards Deming</em></p>
+          <div class="about-details">
+            <p><strong>Name:</strong> GANJA VENKATA SAI SUDHEER</p>
+            <p><strong>Date of birth:</strong> APRIL 18, 2002</p>
+            <p><strong>Address:</strong> Pamarru, East Godavari, Andhra Pradesh, India</p>
+            <p><strong>Zip code:</strong> 533305</p>
+            <p><strong>Email:</strong> venkatasaisudheer03@gmail.com</p>
+            <p><strong>Phone:</strong> +91-9010071468</p>
+          </div>
+          <div class="interests">
+            <span><i class="fas fa-brain"></i> Machine Learning</span>
+            <span><i class="fas fa-chart-line"></i> Data Analysis</span>
+            <span><i class="fas fa-laptop-code"></i> Python Coding</span>
+            <span><i class="fas fa-database"></i> SQL</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <!-- Skills Section -->
-    <section id="skills" class="skills-section">
-        <h2>My Skills</h2>
-        <div class="skills-grid">
-            <div class="skill-card"><img src="Python-logo-notext.svg.png" class="skill-icon" alt="Python" /><h4>Python</h4><div class="level-label">90%</div></div>
-            <div class="skill-card"><img src="download.png" class="skill-icon" alt="Pandas" /><h4>Pandas</h4><div class="level-label">88%</div></div>
-            <div class="skill-card"><img src="download (1).png" class="skill-icon" alt="Power BI" /><h4>Power BI</h4><div class="level-label">85%</div></div>
-            <div class="skill-card"><img src="images.png" class="skill-icon" alt="SQL" /><h4>SQL</h4><div class="level-label">78%</div></div>
-            <div class="skill-card"><img src="EXCEL.png" class="skill-icon" alt="EXCEL" /><h4>EXCEL</h4><div class="level-label">88%</div></div>
-            <div class="skill-card"><img src="Machine-learning-logo-1.webp" class="skill-icon" alt="MACHINE Learning" /><h4>Machine learning</h4><div class="level-label">75%</div></div>
-        </div>
-    </section>
+  <!-- Skills Section -->
+  <section id="skills" class="skills-section">
+    <h2>My Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-card"><img src="Python-logo-notext.svg.png" class="skill-icon" alt="Python" /><h4>Python</h4><div class="level-label">90%</div></div>
+      <div class="skill-card"><img src="download.png" class="skill-icon" alt="Pandas" /><h4>Pandas</h4><div class="level-label">88%</div></div>
+      <div class="skill-card"><img src="download (1).png" class="skill-icon" alt="Power BI" /><h4>Power BI</h4><div class="level-label">85%</div></div>
+      <div class="skill-card"><img src="images.png" class="skill-icon" alt="SQL" /><h4>SQL</h4><div class="level-label">78%</div></div>
+      <div class="skill-card"><img src="EXCEL.png" class="skill-icon" alt="EXCEL" /><h4>EXCEL</h4><div class="level-label">88%</div></div>
+      <div class="skill-card"><img src="Machine-learning-logo-1.webp" class="skill-icon" alt="Machine Learning" /><h4>Machine learning</h4><div class="level-label">75%</div></div>
+    </div>
+  </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="projects-section">
-        <h2 class="section-title">My Projects</h2>
-        <div class="projects-grid">
-            <div class="project-card">
-                <img src="2024-spotify-brand-assets-media-kit.jpg" alt="Spotify Analysis">
-                <div class="project-info">
-                    <h3>Spotify Hit Prediction</h3>
-                    <p>Data analysis of top Spotify tracks to uncover hit patterns.</p>
-                    <a href="https://github.com/sudheer2207007" target="_blank">View Project</a>
-                </div>
-            </div>
-            <div class="project-card">
-                <img src="CM CHURN.webp" alt="Churn Prediction">
-                <div class="project-info">
-                    <h3>Customer Churn Prediction</h3>
-                    <p>Used ML models to identify factors affecting customer retention.</p>
-                    <a href="https://github.com/sudheer2207007" target="_blank">View Project</a>
-                </div>
-            </div>
-            <div class="project-card">
-                <img src="cricket-player-logo-playing-short-600nw-2417730941.webp" alt="Cricket Forecast">
-                <div class="project-info">
-                    <h3>Cricket Match Forecast</h3>
-                    <p>Predicted match outcomes using historical IPL data and ML.</p>
-                    <a href="https://github.com/sudheer2207007" target="_blank">View Project</a>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- Certificates Section -->
+  <section id="certificates" class="certificates-section">
+    <h2 class="section-title">My Certificates</h2>
+    <div class="certificates-grid">
+      <div class="certificate-card">
+        <img src="ibm.jpg" alt="Certificate" class="certificate-img" />
+        <p class="certificate-caption">IBM Data Analyst Certificate</p>
+      </div>
+    </div>
+  </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact-section">
-        <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
-            <form class="contact-form">
-                <div class="form-group">
-                    <input type="text" placeholder="Your Name" required />
-                </div>
-                <div class="form-group">
-                    <input type="email" placeholder="Your Email" required />
-                </div>
-                <div class="form-group">
-                    <textarea rows="5" placeholder="Your Message" required></textarea>
-                </div>
-                <button type="submit" class="btn primary">Send Message</button>
-            </form>
+  <!-- Projects Section -->
+  <section id="projects" class="projects-section">
+    <h2 class="section-title">My Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <img src="2024-spotify-brand-assets-media-kit.jpg" alt="Spotify Analysis">
+        <div class="project-info">
+          <h3>Spotify Hit Prediction</h3>
+          <p>Data analysis of top Spotify tracks to uncover hit patterns.</p>
+          <a href="https://github.com/sudheer2207007" target="_blank">View Project</a>
         </div>
-    </section>
+      </div>
+      <div class="project-card">
+        <img src="CM CHURN.webp" alt="Churn Prediction">
+        <div class="project-info">
+          <h3>Customer Churn Prediction</h3>
+          <p>Used ML models to identify factors affecting customer retention.</p>
+          <a href="https://github.com/sudheer2207007" target="_blank">View Project</a>
+        </div>
+      </div>
+      <div class="project-card">
+        <img src="cricket-player-logo-playing-short-600nw-2417730941.webp" alt="Cricket Forecast">
+        <div class="project-info">
+          <h3>Cricket Match Forecast</h3>
+          <p>Predicted match outcomes using historical IPL data and ML.</p>
+          <a href="https://github.com/sudheer2207007" target="_blank">View Project</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-container">
-            <h3>SUDHEER_GANJA
-            </h3>
-            <p>Turning data into decisions with Python, ML, and BI tools.</p>
-            <div class="social-icons">
-                <a href="https://github.com/sudheer2207007" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="https://linkedin.com/in/venkata-sai-sudheer-ganja-351832245" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="https://www.instagram.com/sudheer_ganja/" target="_blank"><i class="fab fa-instagram"></i></a>
-            </div>
-            <p class="copyright">© 2025 GANJA VENKATA SAI SUDHEER. All rights reserved.</p>
+  <!-- Contact Section -->
+  <section id="contact" class="contact-section">
+    <div class="container">
+      <h2 class="section-title">Get In Touch</h2>
+      <form class="contact-form" action="https://formspree.io/f/xyzjqjrk" method="POST">
+        <div class="form-group">
+          <input type="text" name="name" placeholder="Your Name" required />
         </div>
-    </footer>
+        <div class="form-group">
+          <input type="email" name="email" placeholder="Your Email" required />
+        </div>
+        <div class="form-group">
+          <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+        </div>
+        <button type="submit" class="btn primary">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <h3>SUDHEER_GANJA</h3>
+      <p>Turning data into decisions with Python, ML, and BI tools.</p>
+      <div class="social-icons">
+        <a href="https://github.com/sudheer2207007" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://linkedin.com/in/venkata-sai-sudheer-ganja-351832245" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://www.instagram.com/sudheer_ganja/" target="_blank"><i class="fab fa-instagram"></i></a>
+      </div>
+      <p class="copyright">© 2025 GANJA VENKATA SAI SUDHEER. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Dark Mode Script -->
+  <script>
+    const toggle = document.getElementById('theme-toggle');
+    const body = document.body;
+
+    if (localStorage.getItem("dark-mode") === "enabled") {
+      body.classList.add("dark-mode");
+      toggle.textContent = "☀️";
+    }
+
+    toggle.addEventListener("click", () => {
+      body.classList.toggle("dark-mode");
+      if (body.classList.contains("dark-mode")) {
+        localStorage.setItem("dark-mode", "enabled");
+        toggle.textContent = "☀️";
+      } else {
+        localStorage.setItem("dark-mode", "disabled");
+        toggle.textContent = "🌙";
+      }
+    });
+  </script>
 </body>
 
 </html>

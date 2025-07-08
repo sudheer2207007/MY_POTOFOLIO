@@ -22,3 +22,24 @@ ScrollReveal().reveal('.contact-section', {
   duration: 1000,
   delay: 300,
 });
+<script>
+  const toggle = document.getElementById('theme-toggle');
+  const body = document.body;
+
+  // Check for previous mode in localStorage
+  if (localStorage.getItem("dark-mode") === "enabled") {
+    body.classList.add("dark-mode");
+    toggle.textContent = "☀️";
+  }
+
+  toggle.addEventListener("click", () => {
+    body.classList.toggle("dark-mode");
+    if (body.classList.contains("dark-mode")) {
+      localStorage.setItem("dark-mode", "enabled");
+      toggle.textContent = "☀️";
+    } else {
+      localStorage.setItem("dark-mode", "disabled");
+      toggle.textContent = "🌙";
+    }
+  });
+</script>
