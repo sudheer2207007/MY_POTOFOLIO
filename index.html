@@ -67,6 +67,65 @@
       border: 1px solid #fff;
       color: #fff;
     }
+
+    /* PROJECT FILTER STYLES */
+    .project-filters {
+      text-align: center;
+      margin-bottom: 2rem;
+      padding: 0 20px;
+    }
+
+    .filter-btn {
+      border: none;
+      padding: 10px 20px;
+      margin: 5px;
+      border-radius: 25px;
+      cursor: pointer;
+      background: #e0e0e0;
+      color: #333;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      font-size: 14px;
+    }
+
+    .filter-btn:hover {
+      background: #0077ff;
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    .filter-btn.active {
+      background: #0077ff;
+      color: #fff;
+      box-shadow: 0 4px 15px rgba(0, 119, 255, 0.3);
+    }
+
+    /* Dark mode filter buttons */
+    body.dark-mode .filter-btn {
+      background: #333;
+      color: #f1f1f1;
+      border: 1px solid #555;
+    }
+
+    body.dark-mode .filter-btn:hover,
+    body.dark-mode .filter-btn.active {
+      background: #0077ff;
+      color: #fff;
+      border-color: #0077ff;
+    }
+
+    /* Responsive filter buttons */
+    @media (max-width: 768px) {
+      .project-filters {
+        padding: 0 10px;
+      }
+      
+      .filter-btn {
+        padding: 8px 16px;
+        font-size: 12px;
+        margin: 3px;
+      }
+    }
   </style>
 </head>
 
@@ -116,10 +175,10 @@
           <p>
             I'm GANJA VENKATA SAI SUDHEER, a passionate Data Science and Data Analysis enthusiast from Andhra Pradesh, India. 
             My expertise includes Python, machine learning, Power BI, Tableau, and data visualization. 
-            I’ve worked on real-world datasets to predict customer churn, analyze Spotify hits, and forecast cricket match outcomes using data mining techniques. 
-            I’m driven by curiosity and love turning raw data into actionable insights.
+            I've worked on real-world datasets to predict customer churn, analyze Spotify hits, and forecast cricket match outcomes using data mining techniques. 
+            I'm driven by curiosity and love turning raw data into actionable insights.
           </p>
-          <p><em>“Without data, you're just another person with an opinion.” – W. Edwards Deming</em></p>
+          <p><em>"Without data, you're just another person with an opinion." – W. Edwards Deming</em></p>
           <div class="about-details">
             <p><strong>Name:</strong> GANJA VENKATA SAI SUDHEER</p>
             <p><strong>Date of birth:</strong> APRIL 18, 2002</p>
@@ -152,135 +211,98 @@
     </div>
   </section>
 
-  <!-- Add this in the Certificates Section -->
-<section id="certificates" class="certificates-section">
-  <h2 class="section-title">My Certificates</h2>
-  <div class="certificates-grid">
-    <!-- IBM Certificate -->
-    <div class="certificate-card">
-      <img src="ibm.jpg" alt="IBM Certificate" class="certificate-img" onclick="openModal('ibm.jpg')" />
-      <p class="certificate-caption">IBM Data Analyst Certificate</p>
-    </div>
+  <!-- Certificates Section -->
+  <section id="certificates" class="certificates-section">
+    <h2 class="section-title">My Certificates</h2>
+    <div class="certificates-grid">
+      <!-- IBM Certificate -->
+      <div class="certificate-card">
+        <img src="ibm.jpg" alt="IBM Certificate" class="certificate-img" onclick="openModal('ibm.jpg')" />
+        <p class="certificate-caption">IBM Data Analyst Certificate</p>
+      </div>
 
-    <!-- AWS Certificate -->
-    <div class="certificate-card">
-      <img src="aws certification.jpg" alt="AWS Certificate" class="certificate-img" onclick="openModal('aws certification.jpg')" />
-      <p class="certificate-caption">AWS Data Analytics Certificate</p>
+      <!-- AWS Certificate -->
+      <div class="certificate-card">
+        <img src="aws certification.jpg" alt="AWS Certificate" class="certificate-img" onclick="openModal('aws certification.jpg')" />
+        <p class="certificate-caption">AWS Data Analytics Certificate</p>
+      </div>
     </div>
+  </section>
+
+  <!-- Certificate Modal -->
+  <div id="certificateModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.8); z-index:1000; justify-content:center; align-items:center;">
+    <img id="modalImage" style="max-width:90%; max-height:90%; box-shadow:0 0 20px rgba(255,255,255,0.2); border-radius:10px;" />
   </div>
-</section>
 
-<!-- Certificate Modal -->
-<div id="certificateModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.8); z-index:1000; justify-content:center; align-items:center;">
-  <img id="modalImage" style="max-width:90%; max-height:90%; box-shadow:0 0 20px rgba(255,255,255,0.2); border-radius:10px;" />
-</div>
-
-<!-- Script at the end of body -->
-<script src="https://unpkg.com/scrollreveal"></script>
-<script>
-  // ScrollReveal
-  ScrollReveal().reveal('.hero-left', { origin: 'left', distance: '50px', duration: 1000, delay: 300 });
-  ScrollReveal().reveal('.hero-right', { origin: 'right', distance: '50px', duration: 1000, delay: 500 });
-  ScrollReveal().reveal('.navbar', { origin: 'top', distance: '20px', duration: 800, delay: 200 });
-  ScrollReveal().reveal('.about-img', { origin: 'left', distance: '50px', duration: 1000, delay: 200 });
-  ScrollReveal().reveal('.about-content', { origin: 'right', distance: '50px', duration: 1000, delay: 300 });
-  ScrollReveal().reveal('.contact-section', { origin: 'bottom', distance: '60px', duration: 1000, delay: 300 });
-
-  // Theme toggle
-  const toggle = document.getElementById('theme-toggle');
-  const body = document.body;
-  if (localStorage.getItem("dark-mode") === "enabled") {
-    body.classList.add("dark-mode");
-    toggle.textContent = "☀️";
-  }
-  toggle.addEventListener("click", () => {
-    body.classList.toggle("dark-mode");
-    if (body.classList.contains("dark-mode")) {
-      localStorage.setItem("dark-mode", "enabled");
-      toggle.textContent = "☀️";
-    } else {
-      localStorage.setItem("dark-mode", "disabled");
-      toggle.textContent = "🌙";
-    }
-  });
-
-  // Modal logic for certificate view
-  function openModal(src) {
-    const modal = document.getElementById("certificateModal");
-    const modalImg = document.getElementById("modalImage");
-    modal.style.display = "flex";
-    modalImg.src = src;
-  }
-
-  // Close modal on outside click
-  document.getElementById("certificateModal").addEventListener("click", (e) => {
-    if (e.target.id === "certificateModal") {
-      document.getElementById("certificateModal").style.display = "none";
-    }
-  });
-</script>
-
-
- <!-- Projects Section -->
-<section id="projects" class="projects-section">
-  <h2 class="section-title">Featured Projects</h2>
-  <div class="projects-grid">
+  <!-- Projects Section -->
+  <section id="projects" class="projects-section">
+    <h2 class="section-title">Featured Projects</h2>
     
-    <!-- Project 1 -->
-    <div class="project-card">
-      <img src="2024-spotify-brand-assets-media-kit.jpg" alt="Spotify Data Project" />
-      <div class="project-info">
-        <h3>🎵 Spotify Hit Prediction</h3>
-        <p>Analyzed Spotify track data to discover what makes a song popular using EDA & machine learning.</p>
-        <div class="project-buttons">
-          <a href="https://your-live-demo-link.com" class="btn primary" target="_blank">View Project</a>
-          <a href="https://github.com/sudheer2207007/Spotify-Hit-Prediction" class="btn outline" target="_blank">View Code</a>
+    <!-- Project Filter Controls -->
+    <div class="project-filters">
+      <button class="filter-btn active" data-filter="all">All Projects</button>
+      <button class="filter-btn" data-filter="machine-learning">Machine Learning</button>
+      <button class="filter-btn" data-filter="visualization">Data Visualization</button>
+      <button class="filter-btn" data-filter="dashboard">Dashboards</button>
+      <button class="filter-btn" data-filter="predictive">Predictive Analytics</button>
+    </div>
+    
+    <div class="projects-grid">
+      
+      <!-- Project 1 -->
+      <div class="project-card" data-category="machine-learning visualization predictive">
+        <img src="2024-spotify-brand-assets-media-kit.jpg" alt="Spotify Data Project" />
+        <div class="project-info">
+          <h3>🎵 Spotify Hit Prediction</h3>
+          <p>Analyzed Spotify track data to discover what makes a song popular using EDA & machine learning.</p>
+          <div class="project-buttons">
+            <a href="https://your-live-demo-link.com" class="btn primary" target="_blank">View Project</a>
+            <a href="https://github.com/sudheer2207007/Spotify-Hit-Prediction" class="btn outline" target="_blank">View Code</a>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- Project 2 -->
-    <div class="project-card">
-      <img src="CM CHURN.webp" alt="Customer Churn Project" />
-      <div class="project-info">
-        <h3>📉 Customer Churn Prediction</h3>
-        <p>Predicted customer churn using logistic regression and decision trees on the Telco dataset.</p>
-        <div class="project-buttons">
-          <a href="https://your-churn-app-demo.com" class="btn primary" target="_blank">View Project</a>
-          <a href="https://github.com/sudheer2207007/Customer-Churn-Prediction" class="btn outline" target="_blank">View Code</a>
+      <!-- Project 2 -->
+      <div class="project-card" data-category="machine-learning predictive">
+        <img src="CM CHURN.webp" alt="Customer Churn Project" />
+        <div class="project-info">
+          <h3>📉 Customer Churn Prediction</h3>
+          <p>Predicted customer churn using logistic regression and decision trees on the Telco dataset.</p>
+          <div class="project-buttons">
+            <a href="https://your-churn-app-demo.com" class="btn primary" target="_blank">View Project</a>
+            <a href="https://github.com/sudheer2207007/Customer-Churn-Prediction" class="btn outline" target="_blank">View Code</a>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- Project 3 -->
-    <div class="project-card">
-      <img src="cricket-player-logo-playing-short-600nw-2417730941.webp" alt="Cricket Data Mining" />
-      <div class="project-info">
-        <h3>🏏 IPL Match Prediction</h3>
-        <p>Used IPL ball-by-ball data and data mining to forecast match outcomes.</p>
-        <div class="project-buttons">
-          <a href="https://3kqcahjxpulhnh9bvtfb8o.streamlit.app/" class="btn primary" target="_blank">View Project</a>
-          <a href="https://github.com/sudheer2207007/-IPL-Match-Prediction" class="btn outline" target="_blank">View Code</a>
+      <!-- Project 3 -->
+      <div class="project-card" data-category="machine-learning predictive">
+        <img src="cricket-player-logo-playing-short-600nw-2417730941.webp" alt="Cricket Data Mining" />
+        <div class="project-info">
+          <h3>🏏 IPL Match Prediction</h3>
+          <p>Used IPL ball-by-ball data and data mining to forecast match outcomes.</p>
+          <div class="project-buttons">
+            <a href="https://3kqcahjxpulhnh9bvtfb8o.streamlit.app/" class="btn primary" target="_blank">View Project</a>
+            <a href="https://github.com/sudheer2207007/-IPL-Match-Prediction" class="btn outline" target="_blank">View Code</a>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- Project 4 -->
-    <div class="project-card">
-      <img src="coustmor churn.jpg" alt="Sales Dashboard Project" />
-      <div class="project-info">
-        <h3>🔍 Customer Churn Prediction</h3>
-        <p>📈 Smart Dashboard for Data Analysts.</p>
-        <div class="project-buttons">
-          <a href="https://churn-predictor-app-oxtooytcxy7lu4dmrexpri.streamlit.app/" class="btn primary" target="_blank">View Project</a>
-          <a href="https://github.com/sudheer2207007/churn-predictor-streamlit" class="btn outline" target="_blank">View Code</a>
+      <!-- Project 4 -->
+      <div class="project-card" data-category="dashboard predictive">
+        <img src="coustmor churn.jpg" alt="Sales Dashboard Project" />
+        <div class="project-info">
+          <h3>🔍 Customer Churn Prediction</h3>
+          <p>📈 Smart Dashboard for Data Analysts.</p>
+          <div class="project-buttons">
+            <a href="https://churn-predictor-app-oxtooytcxy7lu4dmrexpri.streamlit.app/" class="btn primary" target="_blank">View Project</a>
+            <a href="https://github.com/sudheer2207007/churn-predictor-streamlit" class="btn outline" target="_blank">View Code</a>
+          </div>
         </div>
       </div>
+
     </div>
-
-  </div>
-</section>
-
+  </section>
 
   <!-- Contact Section -->
   <section id="contact" class="contact-section">
@@ -315,16 +337,23 @@
     </div>
   </footer>
 
-  <!-- Dark Mode Script -->
+  <script src="https://unpkg.com/scrollreveal"></script>
   <script>
+    // ScrollReveal
+    ScrollReveal().reveal('.hero-left', { origin: 'left', distance: '50px', duration: 1000, delay: 300 });
+    ScrollReveal().reveal('.hero-right', { origin: 'right', distance: '50px', duration: 1000, delay: 500 });
+    ScrollReveal().reveal('.navbar', { origin: 'top', distance: '20px', duration: 800, delay: 200 });
+    ScrollReveal().reveal('.about-img', { origin: 'left', distance: '50px', duration: 1000, delay: 200 });
+    ScrollReveal().reveal('.about-content', { origin: 'right', distance: '50px', duration: 1000, delay: 300 });
+    ScrollReveal().reveal('.contact-section', { origin: 'bottom', distance: '60px', duration: 1000, delay: 300 });
+
+    // Theme toggle
     const toggle = document.getElementById('theme-toggle');
     const body = document.body;
-
     if (localStorage.getItem("dark-mode") === "enabled") {
       body.classList.add("dark-mode");
       toggle.textContent = "☀️";
     }
-
     toggle.addEventListener("click", () => {
       body.classList.toggle("dark-mode");
       if (body.classList.contains("dark-mode")) {
@@ -334,6 +363,56 @@
         localStorage.setItem("dark-mode", "disabled");
         toggle.textContent = "🌙";
       }
+    });
+
+    // Modal logic for certificate view
+    function openModal(src) {
+      const modal = document.getElementById("certificateModal");
+      const modalImg = document.getElementById("modalImage");
+      modal.style.display = "flex";
+      modalImg.src = src;
+    }
+
+    // Close modal on outside click
+    document.getElementById("certificateModal").addEventListener("click", (e) => {
+      if (e.target.id === "certificateModal") {
+        document.getElementById("certificateModal").style.display = "none";
+      }
+    });
+
+    // Project filtering functionality
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    const projectCards = document.querySelectorAll(".project-card");
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        // Remove active class from all buttons
+        document.querySelector(".filter-btn.active").classList.remove("active");
+        // Add active class to clicked button
+        btn.classList.add("active");
+
+        const filter = btn.dataset.filter;
+
+        projectCards.forEach(card => {
+          const categories = card.dataset.category.split(" ");
+          const showCard = filter === "all" || categories.includes(filter);
+          
+          if (showCard) {
+            card.style.display = "block";
+            card.style.opacity = "1";
+            card.style.transform = "scale(1)";
+          } else {
+            card.style.display = "none";
+            card.style.opacity = "0";
+            card.style.transform = "scale(0.8)";
+          }
+        });
+      });
+    });
+
+    // Add smooth transition for project cards
+    projectCards.forEach(card => {
+      card.style.transition = "all 0.3s ease";
     });
   </script>
 </body>
