@@ -158,7 +158,7 @@
     </div>
     <div class="hero-right">
       <div class="bg-skew"></div>
-      <img src="photo.jpg" alt="Sudheer" />
+      <img src="images/photo.jpg" alt="Sudheer" />
     </div>
   </section>
 
@@ -167,7 +167,7 @@
     <div class="container">
       <div class="about-grid">
         <div class="about-img">
-          <img src="./into.jpg" alt="Profile Picture">
+          <img src="images/into.jpg" alt="Profile Picture">
         </div>
         <div class="about-content">
           <h5 class="section-subtitle">MY INTRODUCTION</h5>
@@ -202,12 +202,12 @@
   <section id="skills" class="skills-section">
     <h2>My Skills</h2>
     <div class="skills-grid">
-      <div class="skill-card"><img src="Python-logo-notext.svg.png" class="skill-icon" alt="Python" /><h4>Python</h4><div class="level-label">90%</div></div>
-      <div class="skill-card"><img src="download.png" class="skill-icon" alt="Pandas" /><h4>Pandas</h4><div class="level-label">88%</div></div>
-      <div class="skill-card"><img src="download (1).png" class="skill-icon" alt="Power BI" /><h4>Power BI</h4><div class="level-label">85%</div></div>
-      <div class="skill-card"><img src="images.png" class="skill-icon" alt="SQL" /><h4>SQL</h4><div class="level-label">78%</div></div>
-      <div class="skill-card"><img src="EXCEL.png" class="skill-icon" alt="EXCEL" /><h4>EXCEL</h4><div class="level-label">88%</div></div>
-      <div class="skill-card"><img src="Machine-learning-logo-1.webp" class="skill-icon" alt="Machine Learning" /><h4>Machine learning</h4><div class="level-label">75%</div></div>
+      <div class="skill-card"><img src="/images/Python-logo-notext.svg.png" class="skill-icon" alt="Python" /><h4>Python</h4><div class="level-label">  </div></div>
+      <div class="skill-card"><img src="/images/download.png" class="skill-icon" alt="Pandas" /><h4>Pandas</h4><div class="level-label"></div></div>
+      <div class="skill-card"><img src="/images/download (1).png" class="skill-icon" alt="Power BI" /><h4>Power BI</h4><div class="level-label"></div></div>
+      <div class="skill-card"><img src="/images/images.png" class="skill-icon" alt="SQL" /><h4>SQL</h4><div class="level-label"></div></div>
+      <div class="skill-card"><img src="images\EXCEL.png" class="skill-icon" alt="EXCEL" /><h4>EXCEL</h4><div class="level-label"></div></div>
+      <div class="skill-card"><img src="/images/Machine-learning-logo-1.webp" class="skill-icon" alt="Machine Learning" /><h4>Machine learning</h4><div class="level-label"></div></div>
     </div>
   </section>
 
@@ -218,19 +218,19 @@
     
     <!-- IBM Certificate -->
     <div class="certificate-card">
-      <img src="ibm.jpg" alt="IBM Certificate" class="certificate-img" onclick="openModal('ibm.jpg')" />
+      <img src="/certificates/ibm.jpg" alt="IBM Certificate" class="certificate-img" onclick="openModal('ibm.jpg')" />
       <p class="certificate-caption">IBM Data Analyst Certificate</p>
     </div>
 
     <!-- AWS Certificate -->
     <div class="certificate-card">
-      <img src="aws certification.jpg" alt="AWS Certificate" class="certificate-img" onclick="openModal('aws certification.jpg')" />
+      <img src="/certificates/aws certification.jpg" alt="AWS Certificate" class="certificate-img" onclick="openModal('aws certification.jpg')" />
       <p class="certificate-caption">AWS Data Analytics Certificate</p>
     </div>
 
     <!-- Tata Certificate -->
     <div class="certificate-card">
-      <img src="tata.jpg" alt="Tata Data Analyst Certificate" class="certificate-img" onclick="openModal('tata.jpg')" />
+      <img src="/certificates/tata.jpg" alt="Tata Data Analyst Certificate" class="certificate-img" onclick="openModal('tata.jpg')" />
       <p class="certificate-caption">Tata Data Analyst Certificate</p>
     </div>
 
@@ -243,61 +243,65 @@
 </div>
 
 
-  <!-- Projects Section -->
-  <section id="projects" class="projects-section">
-    <h2 class="section-title">Featured Projects</h2>
-    
-    <!-- Project Filter Controls -->
-    <div class="project-filters">
-      <button class="filter-btn active" data-filter="all">All Projects</button>
-      <button class="filter-btn" data-filter="machine-learning">Machine Learning</button>
-      <button class="filter-btn" data-filter="visualization">Data Visualization</button>
-      <button class="filter-btn" data-filter="dashboard">Dashboards</button>
-      <button class="filter-btn" data-filter="predictive">Predictive Analytics</button>
-    </div>
-    
-    <div class="projects-grid">
-     <!-- Project 1 -->
-<div class="project-card wip" data-category="machine-learning visualization predictive">
-  <div class="wip-badge">Work in Progress</div>
-  <img src="2024-spotify-brand-assets-media-kit.jpg" alt="Spotify Data Project" />
-  ...
-</div>
+<!-- Projects Section -->
+<section id="projects" class="projects-section">
+  <h2 class="section-title">Featured Projects</h2>
+  
+  <!-- Project Filter Controls -->
+  <div class="project-filters">
+    <button class="filter-btn active" data-filter="all">All Projects</button>
+    <button class="filter-btn" data-filter="machine-learning">Machine Learning</button>
+    <button class="filter-btn" data-filter="visualization">Data Visualization</button>
+    <button class="filter-btn" data-filter="dashboard">Dashboards</button>
+    <button class="filter-btn" data-filter="predictive">Predictive Analytics</button>
+  </div>
+  
+  <div class="projects-grid">
 
-<!-- Project 2 -->
-<div class="project-card wip" data-category="machine-learning predictive">
-  <div class="wip-badge">Work in Progress</div>
-  <img src="CM CHURN.webp" alt="Customer Churn Project" />
-  ...
-</div>
-      <!-- Project 3 -->
-      <div class="project-card" data-category="machine-learning predictive">
-        <img src="cricket-player-logo-playing-short-600nw-2417730941.webp" alt="Cricket Data Mining" />
-        <div class="project-info">
-          <h3>🏏 IPL Match Prediction</h3>
-          <p>Used IPL ball-by-ball data and data mining to forecast match outcomes.</p>
-          <div class="project-buttons">
-            <a href="https://3kqcahjxpulhnh9bvtfb8o.streamlit.app/" class="btn primary" target="_blank">View Project</a>
-            <a href="https://github.com/sudheer2207007/-IPL-Match-Prediction" class="btn outline" target="_blank">View Code</a>
-          </div>
+    <!-- Project 3 -->
+    <div class="project-card" data-category="machine-learning predictive">
+      <img src="images/cricket-player-logo-playing-short-600nw-2417730941.webp" alt="Cricket Data Mining" />
+      <div class="project-info">
+        <h3>🏏 IPL Match Prediction</h3>
+        <p>Used IPL ball-by-ball data and data mining to forecast match outcomes.</p>
+        <div class="project-buttons">
+          <a href="https://3kqcahjxpulhnh9bvtfb8o.streamlit.app/" class="btn primary" target="_blank">View Project</a>
+          <a href="https://github.com/sudheer2207007/-IPL-Match-Prediction" class="btn outline" target="_blank">View Code</a>
         </div>
       </div>
+    </div>
 
-      <!-- Project 4 -->
-      <div class="project-card" data-category="dashboard predictive">
-        <img src="coustmor churn.jpg" alt="Sales Dashboard Project" />
-        <div class="project-info">
-          <h3>🔍 Customer Churn Prediction</h3>
-          <p>📈 Smart Dashboard for Data Analysts.</p>
-          <div class="project-buttons">
-            <a href="https://churn-predictor-app-oxtooytcxy7lu4dmrexpri.streamlit.app/" class="btn primary" target="_blank">View Project</a>
-            <a href="https://github.com/sudheer2207007/churn-predictor-streamlit" class="btn outline" target="_blank">View Code</a>
-          </div>
+    <!-- Project 4 -->
+    <div class="project-card" data-category="dashboard predictive">
+      <img src="/images/coustmor churn.jpg" alt="Sales Dashboard Project" />
+      <div class="project-info">
+        <h3>🔍 Customer Churn Prediction</h3>
+        <p>📈 Smart Dashboard for Data Analysts.</p>
+        <div class="project-buttons">
+          <a href="https://churn-predictor-app-oxtooytcxy7lu4dmrexpri.streamlit.app/" class="btn primary" target="_blank">View Project</a>
+          <a href="https://github.com/sudheer2207007/churn-predictor-streamlit" class="btn outline" target="_blank">View Code</a>
         </div>
       </div>
-
     </div>
-  </section>
+
+    <!-- Project 5 -->
+    <div class="project-card" data-category="machine-learning predictive">
+      <img src="/images/crop.png" alt="Smart Crop Recommendation Project" />
+      <div class="project-info">
+        <h3>🌱 Smart Crop Recommendation Engine</h3>
+        <p>
+          🚀 this ML-powered app helps farmers makes.
+        </p>
+        <div class="project-buttons">
+          <a href="https://smart-crop-recommendation-engine-scztvdmmgibvhmnyybuuha.streamlit.app/" class="btn primary" target="_blank">View Project</a>
+          <a href="https://github.com/sudheer2207007/Smart-Crop-Recommendation-Engine" class="btn outline" target="_blank">View Code</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 
   <!-- Contact Section -->
   <section id="contact" class="contact-section">
