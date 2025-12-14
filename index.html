@@ -214,41 +214,107 @@
  <!-- Certificates Section -->
 <section id="certificates" class="certificates-section">
   <h2 class="section-title">My Certificates</h2>
+
   <div class="certificates-grid">
-    
+
     <!-- IBM Certificate -->
     <div class="certificate-card">
-      <img src="ibm.jpg" alt="IBM Certificate" class="certificate-img" onclick="openModal('ibm.jpg')" />
+      <img 
+        src="ibm.jpg" 
+        alt="IBM Data Analyst Certificate" 
+        class="certificate-img" 
+        onclick="openModal('ibm.jpg')" 
+      />
       <p class="certificate-caption">IBM Data Analyst Certificate</p>
     </div>
 
     <!-- AWS Certificate -->
     <div class="certificate-card">
-      <img src="aws certification.jpg" alt="AWS Certificate" class="certificate-img" onclick="openModal('aws certification.jpg')" />
+      <img 
+        src="aws certification.jpg" 
+        alt="AWS Data Analytics Certificate" 
+        class="certificate-img" 
+        onclick="openModal('aws certification.jpg')" 
+      />
       <p class="certificate-caption">AWS Data Analytics Certificate</p>
     </div>
 
     <!-- Tata Certificate -->
     <div class="certificate-card">
-      <img src="tata.jpg" alt="Tata Data Analyst Certificate" class="certificate-img" onclick="openModal('tata.jpg')" />
-      <p class="certificate-caption">Tata Data Analyst Certificate </p>
+      <img 
+        src="tata.jpg" 
+        alt="Tata Data Analyst Certificate" 
+        class="certificate-img" 
+        onclick="openModal('tata.jpg')" 
+      />
+      <p class="certificate-caption">Tata Data Analyst Certificate</p>
     </div>
 
     <!-- Cisco Certificate -->
     <div class="certificate-card">
-      <img src="CISCO DATA SCIENCE.jpg" alt="Cisco Data Science Certificate" class="certificate-img" onclick="openModal('CISCO DATA SCIENCE.jpg')" />
+      <img 
+        src="CISCO DATA SCIENCE.jpg" 
+        alt="Cisco Data Science Certificate" 
+        class="certificate-img" 
+        onclick="openModal('CISCO DATA SCIENCE.jpg')" 
+      />
       <p class="certificate-caption">Cisco Data Science Certificate</p>
     </div>
+
+    <div class="certificate-card">
+  <img src="image.png" alt="Google Cloud" />
+  <p class="certificate-caption">Google Cloud Skill Certificates</p>
+  <a href="https://www.skills.google/public_profiles/60bed9fe-11a9-471d-a62b-90c623ac2433"
+     class="btn primary" target="_blank">
+     View Certificates
+  </a>
+</div>
+
 
   </div>
 </section>
 
 <!-- Certificate Modal -->
-<div id="certificateModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.8); z-index:1000; justify-content:center; align-items:center;">
-  <img id="modalImage" style="max-width:90%; max-height:90%; box-shadow:0 0 20px rgba(255,255,255,0.2); border-radius:10px;" />
+<div 
+  id="certificateModal" 
+  style="
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color:rgba(0,0,0,0.8);
+    z-index:1000;
+    justify-content:center;
+    align-items:center;
+  "
+  onclick="closeModal()"
+>
+  <img 
+    id="modalImage" 
+    style="
+      max-width:90%;
+      max-height:90%;
+      box-shadow:0 0 20px rgba(255,255,255,0.2);
+      border-radius:10px;
+    " 
+  />
 </div>
 
+<!-- Modal Script -->
+<script>
+  function openModal(imageSrc) {
+    const modal = document.getElementById("certificateModal");
+    const modalImage = document.getElementById("modalImage");
+    modalImage.src = imageSrc;
+    modal.style.display = "flex";
+  }
 
+  function closeModal() {
+    document.getElementById("certificateModal").style.display = "none";
+  }
+</script>
 
 <!-- Projects Section -->
 <section id="projects" class="projects-section">
