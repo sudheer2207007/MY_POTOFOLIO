@@ -7,7 +7,9 @@
   <title>Sudheer | Data Science Portfolio</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Press+Start+2P&display=swap"
+    rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     /* DARK MODE STYLES */
     .theme-toggle {
@@ -119,165 +121,226 @@
       .project-filters {
         padding: 0 10px;
       }
-      
+
       .filter-btn {
         padding: 8px 16px;
         font-size: 12px;
         margin: 3px;
       }
     }
+
+    /* Platformer Styles */
+    .game-platform {
+      position: absolute;
+      background: #0077ff;
+      border: 2px solid #fff;
+      box-shadow: 0 0 10px #0077ff;
+    }
+
+    .game-coin {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background: #ffd700;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      box-shadow: 0 0 15px #ffd700;
+      animation: spin 1s infinite alternate;
+    }
+
+    @keyframes spin {
+      from {
+        transform: scale(1);
+      }
+
+      to {
+        transform: scale(1.1);
+      }
+    }
+
+    .interaction-hint {
+      position: fixed;
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      padding: 10px 20px;
+      border: 2px solid #fff;
+      font-family: 'Press Start 2P', cursive;
+      display: none;
+      z-index: 200;
+    }
   </style>
 </head>
 
 <body>
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="logo">SUDHEER🧑‍💻PORTFOLIO</div>
-    <input type="checkbox" id="menu-toggle" hidden>
-    <label for="menu-toggle" class="menu-icon"><i class="fas fa-bars"></i></label>
-    <ul class="nav-links">
-      <li><a href="#">Home</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#certificates">Certificates</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#contact">Contact</a></li>
-      <li><button id="theme-toggle" class="theme-toggle">🌙</button></li>
-    </ul>
-  </nav>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-left">
-      <p class="tagline">DISCOVERING INSIGHTS THROUGH DATA</p>
-      <h1>Hi, I am <span>GANJA VENKATA SAI SUDHEER</span><br>Aspiring Data Scientist & Analyst</h1>
-      <div class="buttons">
-        <a href="#contact" class="btn primary">Hire me</a>
-        <a href="GANJA VENKATA SAI SUDHEER DATA SCIENCE.pdf" class="btn outline" download>Download CV</a>
-      </div>
+  <!-- MODE SWITCHER -->
+  <div class="mode-control">
+    <div class="mode-btn active" onclick="switchMode('analyst')" title="Analyst View">
+      <i class="fas fa-user-tie"></i>
     </div>
-    <div class="hero-right">
-      <div class="bg-skew"></div>
-      <img src="photo.jpg" alt="Sudheer" />
+    <div class="mode-btn" onclick="switchMode('game')" title="Game Mode">
+      <i class="fas fa-gamepad"></i>
     </div>
-  </section>
-
-  <!-- About Section -->
-  <section id="about" class="about-section">
-    <div class="container">
-      <div class="about-grid">
-        <div class="about-img">
-          <img src="into.jpg" alt="Profile Picture">
-        </div>
-        <div class="about-content">
-          <h5 class="section-subtitle">MY INTRODUCTION</h5>
-          <h2>About Me</h2>
-          <p>
-            I'm GANJA VENKATA SAI SUDHEER, a passionate Data Science and Data Analysis enthusiast from Andhra Pradesh, India. 
-            My expertise includes Python, machine learning, Power BI, Tableau, and data visualization. 
-            I've worked on real-world datasets to predict customer churn, analyze Spotify hits, and forecast cricket match outcomes using data mining techniques. 
-            I'm driven by curiosity and love turning raw data into actionable insights.
-          </p>
-          <p><em>"Without data, you're just another person with an opinion." – W. Edwards Deming</em></p>
-          <div class="about-details">
-            <p><strong>Name:</strong> GANJA VENKATA SAI SUDHEER</p>
-            <p><strong>Date of birth:</strong> APRIL 18, 2002</p>
-            <p><strong>Address:</strong> Pamarru, East Godavari, Andhra Pradesh, India</p>
-            <p><strong>Zip code:</strong> 533305</p>
-            <p><strong>Email:</strong> venkatasaisudheer03@gmail.com</p>
-            <p><strong>Phone:</strong> +91-9010071468</p>
-          </div>
-          <div class="interests">
-            <span><i class="fas fa-brain"></i> Machine Learning</span>
-            <span><i class="fas fa-chart-line"></i> Data Analysis</span>
-            <span><i class="fas fa-laptop-code"></i> Python Coding</span>
-            <span><i class="fas fa-database"></i> SQL</span>
-          </div>
-        </div>
-      </div>
+    <div class="mode-btn" onclick="switchMode('powerbi')" title="Power BI Dashboard">
+      <i class="fas fa-chart-pie"></i>
     </div>
-  </section>
-
-  <!-- Skills Section -->
-  <section id="skills" class="skills-section">
-    <h2>My Skills</h2>
-    <div class="skills-grid">
-      <div class="skill-card"><img src="Python-logo-notext.svg.png" class="skill-icon" alt="Python" /><h4>Python</h4><div class="level-label">  </div></div>
-      <div class="skill-card"><img src="download.png" class="skill-icon" alt="Pandas" /><h4>Pandas</h4><div class="level-label"></div></div>
-      <div class="skill-card"><img src="download (1).png" class="skill-icon" alt="Power BI" /><h4>Power BI</h4><div class="level-label"></div></div>
-      <div class="skill-card"><img src="images.png" class="skill-icon" alt="SQL" /><h4>SQL</h4><div class="level-label"></div></div>
-      <div class="skill-card"><img src="EXCEL.png" class="skill-icon" alt="EXCEL" /><h4>EXCEL</h4><div class="level-label"></div></div>
-      <div class="skill-card"><img src="Machine-learning-logo-1.webp" class="skill-icon" alt="Machine Learning" /><h4>Machine learning</h4><div class="level-label"></div></div>
-    </div>
-  </section>
-
- <!-- Certificates Section -->
-<section id="certificates" class="certificates-section">
-  <h2 class="section-title">My Certificates</h2>
-
-  <div class="certificates-grid">
-
-    <!-- IBM Certificate -->
-    <div class="certificate-card">
-      <img 
-        src="ibm.jpg" 
-        alt="IBM Data Analyst Certificate" 
-        class="certificate-img" 
-        onclick="openModal('ibm.jpg')" 
-      />
-      <p class="certificate-caption">IBM Data Analyst Certificate</p>
-    </div>
-
-    <!-- AWS Certificate -->
-    <div class="certificate-card">
-      <img 
-        src="aws certification.jpg" 
-        alt="AWS Data Analytics Certificate" 
-        class="certificate-img" 
-        onclick="openModal('aws certification.jpg')" 
-      />
-      <p class="certificate-caption">AWS Data Analytics Certificate</p>
-    </div>
-
-    <!-- Tata Certificate -->
-    <div class="certificate-card">
-      <img 
-        src="tata.jpg" 
-        alt="Tata Data Analyst Certificate" 
-        class="certificate-img" 
-        onclick="openModal('tata.jpg')" 
-      />
-      <p class="certificate-caption">Tata Data Analyst Certificate</p>
-    </div>
-
-    <!-- Cisco Certificate -->
-    <div class="certificate-card">
-      <img 
-        src="CISCO DATA SCIENCE.jpg" 
-        alt="Cisco Data Science Certificate" 
-        class="certificate-img" 
-        onclick="openModal('CISCO DATA SCIENCE.jpg')" 
-      />
-      <p class="certificate-caption">Cisco Data Science Certificate</p>
-    </div>
-
-    <div class="certificate-card">
-  <img src="image.png" alt="Google Cloud" />
-  <p class="certificate-caption">Google Cloud Skill Certificates</p>
-  <a href="https://www.skills.google/public_profiles/60bed9fe-11a9-471d-a62b-90c623ac2433"
-     class="btn primary" target="_blank">
-     View Certificates
-  </a>
-</div>
-
-
   </div>
-</section>
 
-<!-- Certificate Modal -->
-<div 
-  id="certificateModal" 
-  style="
+  <!-- ANALYST VIEW (Default) -->
+  <div id="analyst-view" class="view-section active">
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="logo">SUDHEER🧑‍💻PORTFOLIO</div>
+      <input type="checkbox" id="menu-toggle" hidden>
+      <label for="menu-toggle" class="menu-icon"><i class="fas fa-bars"></i></label>
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#certificates">Certificates</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><button id="theme-toggle" class="theme-toggle">🌙</button></li>
+      </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-left">
+        <p class="tagline">DISCOVERING INSIGHTS THROUGH DATA</p>
+        <h1>Hi, I am <span>GANJA VENKATA SAI SUDHEER</span><br>Aspiring Data Scientist & Analyst</h1>
+        <div class="buttons">
+          <a href="#contact" class="btn primary">Hire me</a>
+          <a href="GANJA VENKATA SAI SUDHEER DATA SCIENCE.pdf" class="btn outline" download>Download CV</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="bg-skew"></div>
+        <img src="photo.jpg" alt="Sudheer" />
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-img">
+            <img src="into.jpg" alt="Profile Picture">
+          </div>
+          <div class="about-content">
+            <h5 class="section-subtitle">MY INTRODUCTION</h5>
+            <h2>About Me</h2>
+            <p>
+              I'm GANJA VENKATA SAI SUDHEER, a passionate Data Science and Data Analysis enthusiast from Andhra Pradesh,
+              India.
+              My expertise includes Python, machine learning, Power BI, Tableau, and data visualization.
+              I've worked on real-world datasets to predict customer churn, analyze Spotify hits, and forecast cricket
+              match outcomes using data mining techniques.
+              I'm driven by curiosity and love turning raw data into actionable insights.
+            </p>
+            <p><em>"Without data, you're just another person with an opinion." – W. Edwards Deming</em></p>
+            <div class="about-details">
+              <p><strong>Name:</strong> GANJA VENKATA SAI SUDHEER</p>
+              <p><strong>Date of birth:</strong> APRIL 18, 2002</p>
+              <p><strong>Address:</strong> Pamarru, East Godavari, Andhra Pradesh, India</p>
+              <p><strong>Zip code:</strong> 533305</p>
+              <p><strong>Email:</strong> venkatasaisudheer03@gmail.com</p>
+              <p><strong>Phone:</strong> +91-9010071468</p>
+            </div>
+            <div class="interests">
+              <span><i class="fas fa-brain"></i> Machine Learning</span>
+              <span><i class="fas fa-chart-line"></i> Data Analysis</span>
+              <span><i class="fas fa-laptop-code"></i> Python Coding</span>
+              <span><i class="fas fa-database"></i> SQL</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills-section">
+      <h2>My Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-card"><img src="Python-logo-notext.svg.png" class="skill-icon" alt="Python" />
+          <h4>Python</h4>
+          <div class="level-label"> </div>
+        </div>
+        <div class="skill-card"><img src="download.png" class="skill-icon" alt="Pandas" />
+          <h4>Pandas</h4>
+          <div class="level-label"></div>
+        </div>
+        <div class="skill-card"><img src="download (1).png" class="skill-icon" alt="Power BI" />
+          <h4>Power BI</h4>
+          <div class="level-label"></div>
+        </div>
+        <div class="skill-card"><img src="images.png" class="skill-icon" alt="SQL" />
+          <h4>SQL</h4>
+          <div class="level-label"></div>
+        </div>
+        <div class="skill-card"><img src="EXCEL.png" class="skill-icon" alt="EXCEL" />
+          <h4>EXCEL</h4>
+          <div class="level-label"></div>
+        </div>
+        <div class="skill-card"><img src="Machine-learning-logo-1.webp" class="skill-icon" alt="Machine Learning" />
+          <h4>Machine learning</h4>
+          <div class="level-label"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section id="certificates" class="certificates-section">
+      <h2 class="section-title">My Certificates</h2>
+
+      <div class="certificates-grid">
+
+        <!-- IBM Certificate -->
+        <div class="certificate-card">
+          <img src="ibm.jpg" alt="IBM Data Analyst Certificate" class="certificate-img"
+            onclick="openModal('ibm.jpg')" />
+          <p class="certificate-caption">IBM Data Analyst Certificate</p>
+        </div>
+
+        <!-- AWS Certificate -->
+        <div class="certificate-card">
+          <img src="aws certification.jpg" alt="AWS Data Analytics Certificate" class="certificate-img"
+            onclick="openModal('aws certification.jpg')" />
+          <p class="certificate-caption">AWS Data Analytics Certificate</p>
+        </div>
+
+        <!-- Tata Certificate -->
+        <div class="certificate-card">
+          <img src="tata.jpg" alt="Tata Data Analyst Certificate" class="certificate-img"
+            onclick="openModal('tata.jpg')" />
+          <p class="certificate-caption">Tata Data Analyst Certificate</p>
+        </div>
+
+        <!-- Cisco Certificate -->
+        <div class="certificate-card">
+          <img src="CISCO DATA SCIENCE.jpg" alt="Cisco Data Science Certificate" class="certificate-img"
+            onclick="openModal('CISCO DATA SCIENCE.jpg')" />
+          <p class="certificate-caption">Cisco Data Science Certificate</p>
+        </div>
+
+        <div class="certificate-card">
+          <img src="image.png" alt="Google Cloud" />
+          <p class="certificate-caption">Google Cloud Skill Certificates</p>
+          <a href="https://www.skills.google/public_profiles/60bed9fe-11a9-471d-a62b-90c623ac2433" class="btn primary"
+            target="_blank">
+            View Certificates
+          </a>
+        </div>
+
+
+      </div>
+    </section>
+
+    <!-- Certificate Modal -->
+    <div id="certificateModal" style="
     display:none;
     position:fixed;
     top:0;
@@ -288,205 +351,225 @@
     z-index:1000;
     justify-content:center;
     align-items:center;
-  "
-  onclick="closeModal()"
->
-  <img 
-    id="modalImage" 
-    style="
+  " onclick="closeModal()">
+      <img id="modalImage" style="
       max-width:90%;
       max-height:90%;
       box-shadow:0 0 20px rgba(255,255,255,0.2);
       border-radius:10px;
-    " 
-  />
-</div>
-
-<!-- Modal Script -->
-<script>
-  function openModal(imageSrc) {
-    const modal = document.getElementById("certificateModal");
-    const modalImage = document.getElementById("modalImage");
-    modalImage.src = imageSrc;
-    modal.style.display = "flex";
-  }
-
-  function closeModal() {
-    document.getElementById("certificateModal").style.display = "none";
-  }
-</script>
-
-<!-- Projects Section -->
-<section id="projects" class="projects-section">
-  <h2 class="section-title">Featured Projects</h2>
-  
-  <!-- Project Filter Controls -->
-  <div class="project-filters">
-    <button class="filter-btn active" data-filter="all">All Projects</button>
-    <button class="filter-btn" data-filter="machine-learning">Machine Learning</button>
-    <button class="filter-btn" data-filter="visualization">Data Visualization</button>
-    <button class="filter-btn" data-filter="dashboard">Dashboards</button>
-    <button class="filter-btn" data-filter="predictive">Predictive Analytics</button>
-  </div>
-  
-  <div class="projects-grid">
-
-    <!-- Project 3 -->
-    <div class="project-card" data-category="machine-learning predictive">
-      <img src="cricket-player-logo-playing-short-600nw-2417730941.webp" alt="Cricket Data Mining" />
-      <div class="project-info">
-        <h3>🏏 IPL Match Prediction</h3>
-        <p>Used IPL ball-by-ball data and data mining to forecast match outcomes.</p>
-        <div class="project-buttons">
-          <a href="https://3kqcahjxpulhnh9bvtfb8o.streamlit.app/" class="btn primary" target="_blank">View Project</a>
-          <a href="https://github.com/sudheer2207007/-IPL-Match-Prediction" class="btn outline" target="_blank">View Code</a>
-        </div>
-      </div>
+    " />
     </div>
 
-    <!-- Project 4 -->
-    <div class="project-card" data-category="dashboard predictive">
-      <img src="coustmor churn.jpg" alt="Sales Dashboard Project" />
-      <div class="project-info">
-        <h3>🔍 Customer Churn Prediction</h3>
-        <p>📈 Smart Dashboard for Data Analysts.</p>
-        <div class="project-buttons">
-          <a href="https://churn-predictor-app-oxtooytcxy7lu4dmrexpri.streamlit.app/" class="btn primary" target="_blank">View Project</a>
-          <a href="https://github.com/sudheer2207007/churn-predictor-streamlit" class="btn outline" target="_blank">View Code</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Project 5 -->
-    <div class="project-card" data-category="machine-learning predictive">
-      <img src="crop.png" alt="Smart Crop Recommendation Project" />
-      <div class="project-info">
-        <h3>🌱 Smart Crop Recommendation Engine</h3>
-        <p>
-          🚀 this ML-powered app helps farmers makes.
-        </p>
-        <div class="project-buttons">
-          <a href="https://smart-crop-recommendation-engine-scztvdmmgibvhmnyybuuha.streamlit.app/" class="btn primary" target="_blank">View Project</a>
-          <a href="https://github.com/sudheer2207007/Smart-Crop-Recommendation-Engine" class="btn outline" target="_blank">View Code</a>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-
-  <!-- Contact Section -->
-  <section id="contact" class="contact-section">
-    <div class="container">
-      <h2 class="section-title">Get In Touch</h2>
-      <form class="contact-form" action="https://formspree.io/f/xyzjqjrk" method="POST">
-        <div class="form-group">
-          <input type="text" name="name" placeholder="Your Name" required />
-        </div>
-        <div class="form-group">
-          <input type="email" name="email" placeholder="Your Email" required />
-        </div>
-        <div class="form-group">
-          <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-        </div>
-        <button type="submit" class="btn primary">Send Message</button>
-      </form>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-container">
-      <h3>SUDHEER_GANJA</h3>
-      <p>Turning data into decisions with Python, ML, and BI tools.</p>
-      <div class="social-icons">
-        <a href="https://github.com/sudheer2207007" target="_blank"><i class="fab fa-github"></i></a>
-        <a href="https://linkedin.com/in/venkata-sai-sudheer-ganja-351832245" target="_blank"><i class="fab fa-linkedin"></i></a>
-        <a href="https://www.instagram.com/sudheer_ganja/" target="_blank"><i class="fab fa-instagram"></i></a>
-      </div>
-      <p class="copyright">© 2025 GANJA VENKATA SAI SUDHEER. All rights reserved.</p>
-    </div>
-  </footer>
-
-  <script src="https://unpkg.com/scrollreveal"></script>
-  <script>
-    // ScrollReveal
-    ScrollReveal().reveal('.hero-left', { origin: 'left', distance: '50px', duration: 1000, delay: 300 });
-    ScrollReveal().reveal('.hero-right', { origin: 'right', distance: '50px', duration: 1000, delay: 500 });
-    ScrollReveal().reveal('.navbar', { origin: 'top', distance: '20px', duration: 800, delay: 200 });
-    ScrollReveal().reveal('.about-img', { origin: 'left', distance: '50px', duration: 1000, delay: 200 });
-    ScrollReveal().reveal('.about-content', { origin: 'right', distance: '50px', duration: 1000, delay: 300 });
-    ScrollReveal().reveal('.contact-section', { origin: 'bottom', distance: '60px', duration: 1000, delay: 300 });
-
-    // Theme toggle
-    const toggle = document.getElementById('theme-toggle');
-    const body = document.body;
-    if (localStorage.getItem("dark-mode") === "enabled") {
-      body.classList.add("dark-mode");
-      toggle.textContent = "☀️";
-    }
-    toggle.addEventListener("click", () => {
-      body.classList.toggle("dark-mode");
-      if (body.classList.contains("dark-mode")) {
-        localStorage.setItem("dark-mode", "enabled");
-        toggle.textContent = "☀️";
-      } else {
-        localStorage.setItem("dark-mode", "disabled");
-        toggle.textContent = "🌙";
+    <!-- Modal Script -->
+    <script>
+      function openModal(imageSrc) {
+        const modal = document.getElementById("certificateModal");
+        const modalImage = document.getElementById("modalImage");
+        modalImage.src = imageSrc;
+        modal.style.display = "flex";
       }
-    });
 
-    // Modal logic for certificate view
-    function openModal(src) {
-      const modal = document.getElementById("certificateModal");
-      const modalImg = document.getElementById("modalImage");
-      modal.style.display = "flex";
-      modalImg.src = src;
-    }
-
-    // Close modal on outside click
-    document.getElementById("certificateModal").addEventListener("click", (e) => {
-      if (e.target.id === "certificateModal") {
+      function closeModal() {
         document.getElementById("certificateModal").style.display = "none";
       }
-    });
+    </script>
 
-    // Project filtering functionality
-    const filterButtons = document.querySelectorAll(".filter-btn");
-    const projectCards = document.querySelectorAll(".project-card");
+    <!-- Projects Section -->
+    <section id="projects" class="projects-section">
+      <h2 class="section-title">Featured Projects</h2>
 
-    filterButtons.forEach(btn => {
-      btn.addEventListener("click", () => {
-        // Remove active class from all buttons
-        document.querySelector(".filter-btn.active").classList.remove("active");
-        // Add active class to clicked button
-        btn.classList.add("active");
+      <!-- Project Filter Controls -->
+      <div class="project-filters">
+        <button class="filter-btn active" data-filter="all">All Projects</button>
+        <button class="filter-btn" data-filter="machine-learning">Machine Learning</button>
+        <button class="filter-btn" data-filter="visualization">Data Visualization</button>
+        <button class="filter-btn" data-filter="dashboard">Dashboards</button>
+        <button class="filter-btn" data-filter="predictive">Predictive Analytics</button>
+      </div>
 
-        const filter = btn.dataset.filter;
+      <div class="projects-grid">
 
-        projectCards.forEach(card => {
-          const categories = card.dataset.category.split(" ");
-          const showCard = filter === "all" || categories.includes(filter);
-          
-          if (showCard) {
-            card.style.display = "block";
-            card.style.opacity = "1";
-            card.style.transform = "scale(1)";
-          } else {
-            card.style.display = "none";
-            card.style.opacity = "0";
-            card.style.transform = "scale(0.8)";
-          }
-        });
-      });
-    });
+        <!-- Project 3 -->
+        <div class="project-card" data-category="machine-learning predictive">
+          <img src="cricket-player-logo-playing-short-600nw-2417730941.webp" alt="Cricket Data Mining" />
+          <div class="project-info">
+            <h3>🏏 IPL Match Prediction</h3>
+            <p>Used IPL ball-by-ball data and data mining to forecast match outcomes.</p>
+            <div class="project-buttons">
+              <a href="https://3kqcahjxpulhnh9bvtfb8o.streamlit.app/" class="btn primary" target="_blank">View
+                Project</a>
+              <a href="https://github.com/sudheer2207007/-IPL-Match-Prediction" class="btn outline" target="_blank">View
+                Code</a>
+            </div>
+          </div>
+        </div>
 
-    // Add smooth transition for project cards
-    projectCards.forEach(card => {
-      card.style.transition = "all 0.3s ease";
-    });
-  </script>
+        <!-- Project 4 -->
+        <div class="project-card" data-category="dashboard predictive">
+          <img src="coustmor churn.jpg" alt="Sales Dashboard Project" />
+          <div class="project-info">
+            <h3>🔍 Customer Churn Prediction</h3>
+            <p>📈 Smart Dashboard for Data Analysts.</p>
+            <div class="project-buttons">
+              <a href="https://churn-predictor-app-oxtooytcxy7lu4dmrexpri.streamlit.app/" class="btn primary"
+                target="_blank">View Project</a>
+              <a href="https://github.com/sudheer2207007/churn-predictor-streamlit" class="btn outline"
+                target="_blank">View Code</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 5 -->
+        <div class="project-card" data-category="machine-learning predictive">
+          <img src="crop.png" alt="Smart Crop Recommendation Project" />
+          <div class="project-info">
+            <h3>🌱 Smart Crop Recommendation Engine</h3>
+            <p>
+              🚀 this ML-powered app helps farmers makes.
+            </p>
+            <div class="project-buttons">
+              <a href="https://smart-crop-recommendation-engine-scztvdmmgibvhmnyybuuha.streamlit.app/"
+                class="btn primary" target="_blank">View Project</a>
+              <a href="https://github.com/sudheer2207007/Smart-Crop-Recommendation-Engine" class="btn outline"
+                target="_blank">View Code</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+      <div class="container">
+        <h2 class="section-title">Get In Touch</h2>
+        <form class="contact-form" action="https://formspree.io/f/xyzjqjrk" method="POST">
+          <div class="form-group">
+            <input type="text" name="name" placeholder="Your Name" required />
+          </div>
+          <div class="form-group">
+            <input type="email" name="email" placeholder="Your Email" required />
+          </div>
+          <div class="form-group">
+            <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+          </div>
+          <button type="submit" class="btn primary">Send Message</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <h3>SUDHEER_GANJA</h3>
+        <p>Turning data into decisions with Python, ML, and BI tools.</p>
+        <div class="social-icons">
+          <a href="https://github.com/sudheer2207007" target="_blank"><i class="fab fa-github"></i></a>
+          <a href="https://linkedin.com/in/venkata-sai-sudheer-ganja-351832245" target="_blank"><i
+              class="fab fa-linkedin"></i></a>
+          <a href="https://www.instagram.com/sudheer_ganja/" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p class="copyright">© 2025 GANJA VENKATA SAI SUDHEER. All rights reserved.</p>
+      </div>
+    </footer>
+
+  </div> <!-- End Analyst View -->
+
+  <!-- GAME VIEW -->
+  <div id="game-view" class="view-section hidden">
+    <div class="game-ui">
+      <div class="score-board">SCORE: <span id="score-display">0</span></div>
+      <div class="game-instruction">ARROWS to Move | SPACE to Jump</div>
+      <div id="interaction-hint" class="interaction-hint">PRESS [ENTER]</div>
+    </div>
+    <div class="game-world" id="game-world">
+      <!-- Ground is handled by CSS ::after on .game-world -->
+
+      <div class="avatar" id="hero-avatar">🦸</div>
+
+      <!-- Platforms -->
+      <div class="game-platform" style="left: 300px; bottom: 180px; width: 200px; height: 20px;"></div>
+      <div class="game-platform" style="left: 600px; bottom: 250px; width: 150px; height: 20px;"></div>
+      <div class="game-platform" style="left: 900px; bottom: 150px; width: 200px; height: 20px;"></div>
+
+      <!-- Collectibles (Coins) -->
+      <div class="game-coin" id="coin1" style="left: 380px; bottom: 220px;"></div>
+      <div class="game-coin" id="coin2" style="left: 650px; bottom: 290px;"></div>
+      <div class="game-coin" id="coin3" style="left: 1000px; bottom: 190px;"></div>
+
+      <!-- Signposts (Interactive) -->
+      <div class="game-level" id="level-about" style="left: 200px">
+        <div class="signpost">ABOUT</div>
+      </div>
+      <div class="game-level" id="level-skills" style="left: 800px">
+        <div class="signpost">SKILLS</div>
+      </div>
+      <div class="game-level" id="level-projects" style="left: 1400px">
+        <div class="signpost">PROJECTS</div>
+      </div>
+      <div class="game-level" id="level-certificates" style="left: 2000px">
+        <div class="signpost">CERTIFICATES</div>
+      </div>
+      <div class="game-level" id="level-contact" style="left: 2600px">
+        <div class="signpost">CONTACT</div>
+      </div>
+    </div>
+
+    <!-- Game Interaction Modal -->
+    <div id="game-modal" class="hidden">
+      <div class="pixel-border">
+        <h2 id="game-modal-title">TITLE</h2>
+        <div id="game-modal-content">Content goes here...</div>
+        <button onclick="closeGameModal()" class="pixel-btn">CLOSE [X]</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- POWER BI VIEW -->
+  <div id="powerbi-view" class="view-section hidden">
+    <div class="pbi-sidebar">
+      <div class="pbi-logo">📊 SUDHEER BI</div>
+      <div class="pbi-menu-item active">Overview</div>
+      <div class="pbi-menu-item">Projects</div>
+      <div class="pbi-menu-item">Skills</div>
+    </div>
+    <div class="pbi-main">
+      <div class="pbi-header">
+        <h2>PORTFOLIO ANALYTICS</h2>
+        <div class="pbi-filter">Filter: All Time 🔽</div>
+      </div>
+      <div class="pbi-grid">
+        <div class="pbi-card small">
+          <h3>Total Projects</h3>
+          <div class="big-number">5</div>
+        </div>
+        <div class="pbi-card small">
+          <h3>Skills Mastered</h3>
+          <div class="big-number">6</div>
+        </div>
+        <div class="pbi-card small">
+          <h3>Certifications</h3>
+          <div class="big-number">5</div>
+        </div>
+        <div class="pbi-card large">
+          <h3>Skill Proficiency</h3>
+          <div class="chart-container" style="position: relative; height:200px; width:100%">
+            <canvas id="skillsChart"></canvas>
+          </div>
+        </div>
+        <div class="pbi-card medium">
+          <h3>Project Domains</h3>
+          <div class="chart-container" style="position: relative; height:200px; width:100%">
+            <canvas id="domainsChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/scrollreveal"></script>
+  <script src="script.js"></script>
 </body>
 
 </html>
