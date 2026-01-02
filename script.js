@@ -161,12 +161,64 @@ let triggers = [
 let activeTrigger = null;
 
 const gameContent = {
-  about: "<h2>🙋‍♂️ About Me</h2><p>I am Sudheer, a Data Scientist converting coffee into code and insights.</p>",
-  skills: "<h2>🛠 Skills</h2><ul><li>Python 🐍</li><li>Power BI 📊</li><li>SQL 🗄️</li></ul>",
-  projects: "<h2>🚀 Projects</h2><p>IPL Predictor & Churn Analysis.</p>",
-  certificates: "<h2>📜 Certificates</h2><p>IBM, AWS, Tata Certified.</p>",
-  contact: "<h2>📬 Contact</h2><p>Let's connect!</p>"
+  about: `
+    <h2>🙋‍♂️ About Me</h2>
+    <p>
+      Hi, I am <strong>Ganja Venkata Sai Sudheer</strong>, a passionate 
+      <strong>Data Analyst & Data Science enthusiast</strong>.
+      I love converting raw, messy data into meaningful insights 
+      that support smart business decisions.
+    </p>
+    <p>
+      📍 Andhra Pradesh, India<br>
+      🎓 Background in Data Science, Analytics & BI tools
+    </p>
+  `,
+
+  skills: `
+    <h2>🛠 Skills</h2>
+    <ul>
+      <li>Python 🐍 – Data analysis & machine learning</li>
+      <li>Power BI 📊 – Interactive dashboards & reports</li>
+      <li>SQL 🗄️ – Data querying & optimization</li>
+      <li>Excel 📑 – Advanced formulas & analysis</li>
+      <li>Machine Learning 🤖 – Predictive modeling</li>
+    </ul>
+  `,
+
+  projects: `
+    <h2>🚀 Projects</h2>
+    <ul>
+      <li>🏏 <strong>IPL Match Prediction</strong> – ML model to predict match outcomes</li>
+      <li>🔍 <strong>Customer Churn Prediction</strong> – Identified churn drivers using data</li>
+      <li>🌱 <strong>Smart Crop Recommendation</strong> – ML-based farming decision system</li>
+    </ul>
+  `,
+
+  certificates: `
+    <h2>📜 Certifications</h2>
+    <ul>
+      <li>IBM – Data Analyst Professional Certificate</li>
+      <li>AWS – Data Analytics Certification</li>
+      <li>Tata – Data Analyst Program</li>
+      <li>Cisco – Data Science Certification</li>
+      <li>Google Cloud – Skill Boost Certificates</li>
+    </ul>
+  `,
+
+  contact: `
+    <h2>📬 Contact</h2>
+    <p>
+      Want to collaborate or hire me? Let's connect!
+    </p>
+    <p>
+      📧 Email: <strong>venkatasaisudheer03@gmail.com</strong><br>
+      💼 LinkedIn: <strong>Venkata Sai Sudheer Ganja</strong><br>
+      🧑‍💻 GitHub: <strong>Sudheer2207007</strong>
+    </p>
+  `
 };
+
 
 // Input Handling
 window.addEventListener('keydown', (e) => { keys[e.code] = true; });
