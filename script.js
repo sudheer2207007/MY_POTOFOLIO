@@ -1,434 +1,425 @@
+/* =========================================
+   SUDHEER PORTFOLIO 2026 — script.js
+   ========================================= */
 
 // ==========================================
-// SHARED & ANALYST MODE LOGIC
+// LOADER
 // ==========================================
+const loader = document.getElementById('loader');
+const loaderFill = document.getElementById('loader-fill');
+let progress = 0;
 
-// ScrollReveal
-ScrollReveal().reveal('.hero-left', { origin: 'left', distance: '50px', duration: 1000, delay: 300 });
-ScrollReveal().reveal('.hero-right', { origin: 'right', distance: '50px', duration: 1000, delay: 500 });
-ScrollReveal().reveal('.navbar', { origin: 'top', distance: '20px', duration: 800, delay: 200 });
-ScrollReveal().reveal('.about-img', { origin: 'left', distance: '50px', duration: 1000, delay: 200 });
-ScrollReveal().reveal('.about-content', { origin: 'right', distance: '50px', duration: 1000, delay: 300 });
-ScrollReveal().reveal('.contact-section', { origin: 'bottom', distance: '60px', duration: 1000, delay: 300 });
-
-// Theme toggle
-const toggle = document.getElementById('theme-toggle');
-const body = document.body;
-
-function loadTheme() {
-  if (localStorage.getItem("dark-mode") === "enabled") {
-    body.classList.add("dark-mode");
-    if (toggle) toggle.textContent = "☀️";
+const loaderInterval = setInterval(() => {
+  progress += Math.random() * 18;
+  if (progress >= 100) {
+    progress = 100;
+    clearInterval(loaderInterval);
+    setTimeout(() => {
+      loader.classList.add('hidden');
+      setTimeout(() => loader.remove(), 600);
+      initAnimations();
+    }, 400);
   }
+  loaderFill.style.width = progress + '%';
+}, 120);
+
+// ==========================================
+// CUSTOM CURSOR
+// ==========================================
+const cursorDot = document.getElementById('cursor-dot');
+const cursorRing = document.getElementById('cursor-ring');
+let mouseX = 0, mouseY = 0;
+let ringX = 0, ringY = 0;
+
+document.addEventListener('mousemove', (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+  cursorDot.style.left = mouseX + 'px';
+  cursorDot.style.top = mouseY + 'px';
+});
+
+function animateRing() {
+  ringX += (mouseX - ringX) * 0.12;
+  ringY += (mouseY - ringY) * 0.12;
+  cursorRing.style.left = ringX + 'px';
+  cursorRing.style.top = ringY + 'px';
+  requestAnimationFrame(animateRing);
 }
-loadTheme();
+animateRing();
 
-if (toggle) {
-  toggle.addEventListener("click", () => {
-    body.classList.toggle("dark-mode");
-    if (body.classList.contains("dark-mode")) {
-      localStorage.setItem("dark-mode", "enabled");
-      toggle.textContent = "☀️";
-    } else {
-      localStorage.setItem("dark-mode", "disabled");
-      toggle.textContent = "🌙";
-    }
-  });
-}
-
-// Modal logic for Certificates
-function openModal(src) {
-  const modal = document.getElementById("certificateModal");
-  const modalImg = document.getElementById("modalImage");
-  if (modal && modalImg) {
-    modal.style.display = "flex";
-    modalImg.src = src;
-  }
-}
-
-function closeModal() {
-  const modal = document.getElementById("certificateModal");
-  if (modal) modal.style.display = "none";
-}
-
-const certModal = document.getElementById("certificateModal");
-if (certModal) {
-  certModal.addEventListener("click", (e) => {
-    if (e.target.id === "certificateModal") {
-      certModal.style.display = "none";
-    }
-  });
-}
-
-// Project filtering
-const filterButtons = document.querySelectorAll(".filter-btn");
-const projectCards = document.querySelectorAll(".project-card");
-
-filterButtons.forEach(btn => {
-  btn.addEventListener("click", () => {
-    document.querySelector(".filter-btn.active")?.classList.remove("active");
-    btn.classList.add("active");
-    const filter = btn.dataset.filter;
-
-    projectCards.forEach(card => {
-      const categories = card.dataset.category.split(" ");
-      const showCard = filter === "all" || categories.includes(filter);
-      if (showCard) {
-        card.style.display = "block";
-        setTimeout(() => {
-          card.style.opacity = "1";
-          card.style.transform = "scale(1)";
-        }, 10);
-      } else {
-        card.style.opacity = "0";
-        card.style.transform = "scale(0.8)";
-        setTimeout(() => card.style.display = "none", 300);
-      }
-    });
-  });
+document.querySelectorAll('a, button, .proj-card, .cert-card').forEach(el => {
+  el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+  el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
 });
 
 // ==========================================
-// MULTI-MODE SWITCHER LOGIC
+// NAVBAR SCROLL
 // ==========================================
-let gameLoopId;
-
-function switchMode(modeName) {
-  // 1. Hide all views
-  document.querySelectorAll('.view-section').forEach(el => {
-    el.classList.remove('active');
-    el.classList.add('hidden');
-  });
-
-  // 2. Show target view
-  const target = document.getElementById(modeName + '-view');
-  if (target) {
-    target.classList.remove('hidden');
-    target.classList.add('active');
-  }
-
-  // 3. Initialize/Pause Game Loop
-  if (modeName === 'game') {
-    startGameLoop();
-    heroX = 50; heroY = 0; velocityY = 0; // Reset pos
-  } else {
-    stopGameLoop();
-  }
-
-  // 4. Initialize Charts
-  if (modeName === 'powerbi') {
-    initCharts();
-  }
-
-  // Update Buttons
-  document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
-  // (Optional: Add 'active' to clicked button logic managed by listener below)
-}
-
-document.querySelectorAll('.mode-btn').forEach((btn, index) => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-  });
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 60) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
 });
 
 // ==========================================
-// PLATFORMER GAME LOGIC 🎮
+// BURGER MENU
 // ==========================================
-const hero = document.getElementById('hero-avatar');
-const gameWorld = document.getElementById('game-world');
-const scoreDisplay = document.getElementById('score-display');
-const hintBox = document.getElementById('interaction-hint');
+const burger = document.getElementById('burger');
+const mobileMenu = document.getElementById('mobileMenu');
 
-// Physics Vars
-let heroX = 50;
-let heroY = 0; // Bottom position relative to ground (110px from HTML bottom)
-let velocityY = 0;
-let isJumping = false;
-let gravity = 0.8;
-let moveSpeed = 5;
-let score = 0;
-let keys = {};
-let platforms = []; // Will populate on init
-let collectibles = [];
-let triggers = [
-  { pos: 200, id: 'about', range: 80 },
-  { pos: 800, id: 'skills', range: 80 },
-  { pos: 1400, id: 'projects', range: 80 },
-  { pos: 2000, id: 'certificates', range: 80 },
-  { pos: 2600, id: 'contact', range: 80 }
+burger.addEventListener('click', () => {
+  mobileMenu.classList.toggle('open');
+});
+
+mobileMenu.querySelectorAll('.mob-link').forEach(link => {
+  link.addEventListener('click', () => mobileMenu.classList.remove('open'));
+});
+
+// ==========================================
+// THEME TOGGLE
+// ==========================================
+const themeBtn = document.getElementById('themeBtn');
+const themeIcon = document.getElementById('themeIcon');
+let isLight = false;
+
+const savedTheme = localStorage.getItem('portfolio-theme');
+if (savedTheme === 'light') {
+  document.body.classList.add('light');
+  isLight = true;
+  themeIcon.className = 'fas fa-sun';
+}
+
+themeBtn.addEventListener('click', () => {
+  isLight = !isLight;
+  document.body.classList.toggle('light', isLight);
+  themeIcon.className = isLight ? 'fas fa-sun' : 'fas fa-moon';
+  localStorage.setItem('portfolio-theme', isLight ? 'light' : 'dark');
+});
+
+// ==========================================
+// TYPED ROLE
+// ==========================================
+const roles = [
+  'Data Scientist',
+  'ML Engineer',
+  'Power BI Developer',
+  'Data Analyst',
+  'Azure Data Engineer'
 ];
-let activeTrigger = null;
+let roleIdx = 0;
+let charIdx = 0;
+let isDeleting = false;
+const typedEl = document.getElementById('typedRole');
 
-const gameContent = {
-  about: `
-    <h2>🙋‍♂️ About Me</h2>
-    <p>
-      Hi, I am <strong>Ganja Venkata Sai Sudheer</strong>, a passionate 
-      <strong>Data Analyst & Data Science enthusiast</strong>.
-      I love converting raw, messy data into meaningful insights 
-      that support smart business decisions.
-    </p>
-    <p>
-      📍 Andhra Pradesh, India<br>
-      🎓 Background in Data Science, Analytics & BI tools
-    </p>
-  `,
-
-  skills: `
-    <h2>🛠 Skills</h2>
-    <ul>
-      <li>Python 🐍 – Data analysis & machine learning</li>
-      <li>Power BI 📊 – Interactive dashboards & reports</li>
-      <li>SQL 🗄️ – Data querying & optimization</li>
-      <li>Excel 📑 – Advanced formulas & analysis</li>
-      <li>Machine Learning 🤖 – Predictive modeling</li>
-    </ul>
-  `,
-
-  projects: `
-    <h2>🚀 Projects</h2>
-    <ul>
-      <li>🏏 <strong>IPL Match Prediction</strong> – ML model to predict match outcomes</li>
-      <li>🔍 <strong>Customer Churn Prediction</strong> – Identified churn drivers using data</li>
-      <li>🌱 <strong>Smart Crop Recommendation</strong> – ML-based farming decision system</li>
-    </ul>
-  `,
-
-  certificates: `
-    <h2>📜 Certifications</h2>
-    <ul>
-      <li>IBM – Data Analyst Professional Certificate</li>
-      <li>AWS – Data Analytics Certification</li>
-      <li>Tata – Data Analyst Program</li>
-      <li>Cisco – Data Science Certification</li>
-      <li>Google Cloud – Skill Boost Certificates</li>
-    </ul>
-  `,
-
-  contact: `
-    <h2>📬 Contact</h2>
-    <p>
-      Want to collaborate or hire me? Let's connect!
-    </p>
-    <p>
-      📧 Email: <strong>venkatasaisudheer03@gmail.com</strong><br>
-      💼 LinkedIn: <strong>Venkata Sai Sudheer Ganja</strong><br>
-      🧑‍💻 GitHub: <strong>Sudheer2207007</strong>
-    </p>
-  `
-};
-
-
-// Input Handling
-window.addEventListener('keydown', (e) => { keys[e.code] = true; });
-window.addEventListener('keyup', (e) => { keys[e.code] = false; });
-window.addEventListener('keydown', (e) => {
-  if (e.code === 'Enter' && activeTrigger) {
-    showGameModal(activeTrigger);
-  }
-});
-
-function startGameLoop() {
-  if (gameLoopId) return;
-
-  // Parse Elements
-  platforms = Array.from(document.querySelectorAll('.game-platform')).map(el => {
-    const rect = el.getBoundingClientRect(); // Relative to viewport, need relative to world?
-    // Actually, simpler to parse inline styles or assume static for this demo
-    // Let's rely on parsing style.left/bottom for "world space"
-    return {
-      el: el,
-      left: parseInt(el.style.left),
-      bottom: parseInt(el.style.bottom),
-      width: parseInt(el.style.width),
-      height: parseInt(el.style.height)
-    };
-  });
-
-  collectibles = Array.from(document.querySelectorAll('.game-coin')).map(el => ({
-    el: el,
-    left: parseInt(el.style.left),
-    bottom: parseInt(el.style.bottom),
-    width: 30, height: 30,
-    collected: false
-  }));
-
-  gameLoopId = requestAnimationFrame(updateGame);
-}
-
-function stopGameLoop() {
-  cancelAnimationFrame(gameLoopId);
-  gameLoopId = null;
-}
-
-function updateGame() {
-  if (!document.getElementById('game-view').classList.contains('active')) return;
-
-  // 1. Horizontal Movement
-  if (keys['ArrowRight']) {
-    heroX += moveSpeed;
-    hero.style.transform = 'scaleX(1)';
-  }
-  if (keys['ArrowLeft']) {
-    heroX -= moveSpeed;
-    hero.style.transform = 'scaleX(-1)';
-    if (heroX < 0) heroX = 0;
-  }
-
-  // 2. Vertical Movement (Jump & Gravity)
-  if (keys['Space'] && !isJumping) {
-    velocityY = 12; // Jump Strength
-    isJumping = true;
-  }
-
-  heroY += velocityY;
-  velocityY -= gravity; // Apply Gravity
-
-  // 3. Collision Detection (Ground & Platforms)
-  let onGround = false;
-
-  // Ground Check (Ground is at Y=0 visually, technically bottom: 110px in CSS)
-  if (heroY <= 0) {
-    heroY = 0;
-    velocityY = 0;
-    isJumping = false;
-    onGround = true;
-  }
-
-  // Platform Check
-  // Hero Hitbox: X to X+60 (width approx), Y to Y+80 (height approx)
-  const heroRect = { l: heroX, r: heroX + 50, b: heroY, t: heroY + 80 };
-
-  platforms.forEach(plat => {
-    // Platform Hitbox (World Coords)
-    // Platform bottom is Y pos relative to ground 0
-    // Actually in CSS .game-platform bottom is px from viewport bottom...
-    // Let's standardise: CSS Bottom 110px = Game Y 0.
-    // So Platform Y = plat.bottom - 110.
-    const platY = plat.bottom - 110;
-
-    // Check if landing on top
-    if (velocityY <= 0 && // Falling
-      heroRect.b >= platY && heroRect.b <= platY + 15 && // Feet near top
-      heroRect.r >= plat.left && heroRect.l <= plat.left + plat.width) { // Horiz overlap
-      heroY = platY;
-      velocityY = 0;
-      isJumping = false;
-      onGround = true;
-    }
-  });
-
-  // 4. Collectibles
-  collectibles.forEach(coin => {
-    if (coin.collected) return;
-    const coinY = coin.bottom - 110;
-    // Simple AABB
-    if (heroX < coin.left + 30 && heroX + 50 > coin.left &&
-      heroY < coinY + 30 && heroY + 80 > coinY) {
-      coin.collected = true;
-      coin.el.style.display = 'none';
-      score += 100;
-      scoreDisplay.innerText = score;
-    }
-  });
-
-  // 5. Triggers (Signposts)
-  activeTrigger = null;
-  hintBox.style.display = 'none';
-
-  triggers.forEach(trig => {
-    if (Math.abs(heroX - trig.pos) < trig.range) {
-      activeTrigger = trig.id;
-      hintBox.style.display = 'block';
-      hintBox.innerText = `PRESS ENTER FOR ${trig.id.toUpperCase()}`;
-    }
-  });
-
-  // 6. Apply to DOM
-  // Default bottom is 110px. So style.bottom = 110 + heroY
-  hero.style.bottom = (110 + heroY) + 'px';
-  hero.style.left = heroX + 'px';
-
-  // Camera Follow
-  if (heroX > 400) {
-    gameWorld.style.transform = `translateX(-${heroX - 400}px)`;
+function typeRole() {
+  const current = roles[roleIdx];
+  if (isDeleting) {
+    charIdx--;
   } else {
-    gameWorld.style.transform = `translateX(0px)`;
+    charIdx++;
   }
+  typedEl.textContent = current.slice(0, charIdx);
 
-  gameLoopId = requestAnimationFrame(updateGame);
-}
-
-// Modal Helpers
-function showGameModal(key) {
-  const modal = document.getElementById('game-modal');
-  const title = document.getElementById('game-modal-title');
-  const content = document.getElementById('game-modal-content');
-  if (modal && gameContent[key]) {
-    title.innerText = key.toUpperCase();
-    content.innerHTML = gameContent[key];
-    modal.classList.remove('hidden');
-    // Pause game input slightly?
-    keys = {}; // Reset keys
+  let delay = isDeleting ? 40 : 80;
+  if (!isDeleting && charIdx === current.length) {
+    delay = 2000;
+    isDeleting = true;
+  } else if (isDeleting && charIdx === 0) {
+    isDeleting = false;
+    roleIdx = (roleIdx + 1) % roles.length;
+    delay = 300;
   }
+  setTimeout(typeRole, delay);
 }
-function closeGameModal() {
-  const modal = document.getElementById('game-modal');
-  if (modal) modal.classList.add('hidden');
-}
-
+setTimeout(typeRole, 1800);
 
 // ==========================================
-// POWER BI CHART LOGIC
+// PARTICLE CANVAS
 // ==========================================
-let chartsInitialized = false;
+const canvas = document.getElementById('particleCanvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
 
-function initCharts() {
-  if (chartsInitialized) return;
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
 
-  // Skills Chart (Bar)
-  const ctxSkills = document.getElementById('skillsChart');
-  if (ctxSkills) {
-    new Chart(ctxSkills, {
-      type: 'bar',
-      data: {
-        labels: ['Python', 'SQL', 'Power BI', 'ML', 'Excel'],
-        datasets: [{
-          label: 'Proficiency Level (%)',
-          data: [90, 85, 95, 80, 88],
-          backgroundColor: [
-            '#F2C811', '#374649', '#01B8AA', '#FD625E', '#8AD4EB'
-          ],
-          borderWidth: 1
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: { legend: { display: false } },
-        scales: { y: { beginAtZero: true, max: 100 } }
+class Particle {
+  constructor() { this.reset(); }
+  reset() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.size = Math.random() * 1.5 + 0.3;
+    this.speedX = (Math.random() - 0.5) * 0.3;
+    this.speedY = (Math.random() - 0.5) * 0.3;
+    this.opacity = Math.random() * 0.4 + 0.05;
+  }
+  update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+    if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+      this.reset();
+    }
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(124, 255, 164, ${this.opacity})`;
+    ctx.fill();
+  }
+}
+
+for (let i = 0; i < 120; i++) particles.push(new Particle());
+
+function drawConnections() {
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i + 1; j < particles.length; j++) {
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 100) {
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(particles[j].x, particles[j].y);
+        ctx.strokeStyle = `rgba(124, 255, 164, ${0.06 * (1 - dist / 100)})`;
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
+      }
+    }
+  }
+}
+
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach(p => { p.update(); p.draw(); });
+  drawConnections();
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+// ==========================================
+// REVEAL ON SCROLL
+// ==========================================
+const reveals = document.querySelectorAll('.reveal');
+
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => {
+        entry.target.classList.add('visible');
+      }, 100);
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+reveals.forEach(el => revealObserver.observe(el));
+
+// ==========================================
+// SKILL BARS
+// ==========================================
+const skillBars = document.querySelectorAll('.sb-fill');
+const skillObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const pct = entry.target.dataset.pct;
+      setTimeout(() => {
+        entry.target.style.width = pct + '%';
+        entry.target.classList.add('animated');
+      }, 200);
+      skillObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+skillBars.forEach(bar => skillObserver.observe(bar));
+
+// ==========================================
+// COUNTER ANIMATION
+// ==========================================
+function animateCounter(el) {
+  const target = parseInt(el.dataset.target);
+  let current = 0;
+  const step = target / 40;
+  const timer = setInterval(() => {
+    current += step;
+    if (current >= target) {
+      current = target;
+      clearInterval(timer);
+    }
+    el.textContent = Math.round(current) + '+';
+  }, 40);
+}
+
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      animateCounter(entry.target);
+      counterObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.stat-num').forEach(el => counterObserver.observe(el));
+
+// ==========================================
+// PROJECT FILTER
+// ==========================================
+const filterPills = document.querySelectorAll('.filter-pill');
+const projCards = document.querySelectorAll('.proj-card');
+
+filterPills.forEach(pill => {
+  pill.addEventListener('click', () => {
+    filterPills.forEach(p => p.classList.remove('active'));
+    pill.classList.add('active');
+    const filter = pill.dataset.filter;
+
+    projCards.forEach(card => {
+      const cats = card.dataset.cat || '';
+      const show = filter === 'all' || cats.includes(filter);
+      if (show) {
+        card.style.display = 'block';
+        setTimeout(() => { card.style.opacity = '1'; card.style.transform = ''; }, 10);
+      } else {
+        card.style.opacity = '0';
+        card.style.transform = 'scale(0.9)';
+        setTimeout(() => card.style.display = 'none', 350);
       }
     });
-  }
+  });
+});
 
-  // Domains Chart (Doughnut)
-  const ctxDomains = document.getElementById('domainsChart');
-  if (ctxDomains) {
-    new Chart(ctxDomains, {
-      type: 'doughnut',
-      data: {
-        labels: ['Data Analysis', 'Web Dev', 'Predictive Modeling', 'Visualization'],
-        datasets: [{
-          label: 'Projects',
-          data: [5, 2, 4, 6],
-          backgroundColor: ['#01B8AA', '#374649', '#FD625E', '#F2C811'],
-          hoverOffset: 4
-        }]
+// ==========================================
+// LIGHTBOX
+// ==========================================
+const lightbox = document.getElementById('lightbox');
+const lbImg = document.getElementById('lb-img');
+const lbCaption = document.getElementById('lb-caption');
+
+function openLightbox(src, caption) {
+  lbImg.src = src;
+  lbCaption.textContent = caption;
+  lightbox.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  lightbox.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeLightbox();
+});
+
+// ==========================================
+// RADAR CHART
+// ==========================================
+function initRadarChart() {
+  const ctx = document.getElementById('radarChart');
+  if (!ctx) return;
+  new Chart(ctx, {
+    type: 'radar',
+    data: {
+      labels: ['Python', 'Power BI', 'SQL', 'Machine Learning', 'Azure', 'Excel', 'Statistics'],
+      datasets: [{
+        label: 'Proficiency',
+        data: [90, 88, 85, 82, 78, 88, 80],
+        backgroundColor: 'rgba(124, 255, 164, 0.1)',
+        borderColor: 'rgba(124, 255, 164, 0.8)',
+        borderWidth: 2,
+        pointBackgroundColor: '#7cffa4',
+        pointBorderColor: '#0a0a0f',
+        pointBorderWidth: 2,
+        pointRadius: 5
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      plugins: {
+        legend: { display: false }
       },
-      options: { responsive: true, maintainAspectRatio: false }
+      scales: {
+        r: {
+          beginAtZero: true,
+          max: 100,
+          ticks: {
+            display: false
+          },
+          grid: {
+            color: 'rgba(255,255,255,0.06)'
+          },
+          angleLines: {
+            color: 'rgba(255,255,255,0.06)'
+          },
+          pointLabels: {
+            color: 'rgba(240, 240, 248, 0.7)',
+            font: { size: 11, family: "'JetBrains Mono', monospace" }
+          }
+        }
+      }
+    }
+  });
+}
+
+// ==========================================
+// VANILLA TILT (bubbles)
+// ==========================================
+function initTilt() {
+  if (typeof VanillaTilt !== 'undefined') {
+    VanillaTilt.init(document.querySelectorAll('[data-tilt]'), {
+      max: 15,
+      speed: 400,
+      glare: false,
+      scale: 1.05
     });
   }
-
-  chartsInitialized = true;
 }
+
+// ==========================================
+// INIT ALL
+// ==========================================
+function initAnimations() {
+  initRadarChart();
+  initTilt();
+}
+
+// Smooth active nav link on scroll
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-link');
+
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(link => {
+        link.classList.remove('active-nav');
+        if (link.getAttribute('href') === '#' + entry.target.id) {
+          link.classList.add('active-nav');
+        }
+      });
+    }
+  });
+}, { threshold: 0.4 });
+
+sections.forEach(sec => sectionObserver.observe(sec));
+
+// Add active nav style
+const styleEl = document.createElement('style');
+styleEl.textContent = `.nav-link.active-nav { color: var(--accent) !important; }`;
+document.head.appendChild(styleEl);
+
+// ==========================================
+// SCROLL INDICATOR HIDE ON SCROLL
+// ==========================================
+const scrollInd = document.querySelector('.scroll-indicator');
+if (scrollInd) {
+  window.addEventListener('scroll', () => {
+    scrollInd.style.opacity = window.scrollY > 100 ? '0' : '1';
+  });
+}
+
+console.log('%c[SUDHEER PORTFOLIO 2026]', 'color: #7cffa4; font-size: 1.2rem; font-weight: bold; font-family: JetBrains Mono;');
+console.log('%cHey recruiter! Ping me → venkatasaisudheer03@gmail.com', 'color: #9090a8; font-size: 0.9rem;');
